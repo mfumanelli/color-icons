@@ -87,3 +87,6 @@ ENV/
 # checkpoints of the model
 model_checkpoint/
 .DS_Store
+
+# images
+*.png
