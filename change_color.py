@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import tkinter as tk
 from tkinter.colorchooser import askcolor
-import sys
+import argparse
 
 
 def getColor():
@@ -12,6 +12,7 @@ def getColor():
 
     Returns:
         tuple: RGB and HEX code of the selected color.
+
     """
     win = None
     if not tk._default_root:
@@ -35,13 +36,14 @@ def change_color(input_path, output_path, color):
 
     Returns:
         PIL.Image.Image: Edited icon.
+
     """
     img = Image.open(input_path)
-    img.convert('LA')
+    img = img.convert('LA')
     img = img.convert('RGBA')
     image_np = np.array(img)
     red, green, blue, alpha = image_np.T
-    mask = (red == 0) & (blue == 0) & (green == 0)
+    mask = (alpha > 0)
     image_np[..., :-1][mask.T] = color
     edited_image = Image.fromarray(image_np)
     edited_image.save(output_path)
@@ -49,7 +51,9 @@ def change_color(input_path, output_path, color):
 
 
 if __name__ == "__main__":
-    img_input_path = sys.argv[1]  # insert path of icone
-    img_output_path = sys.argv[2]  # choose output path
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_path', type=str, required=True)
+    parser.add_argument('--output_path', type=str, required=True)
+    args = parser.parse_args()
     rgb, _ = getColor()
-    change_color(input_path=img_input_path, output_path=img_output_path, color=rgb)
+    change_color(input_path=args.input_path, output_path=args.output_path, color=rgb)
