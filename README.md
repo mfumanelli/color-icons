@@ -5,13 +5,13 @@ Simple code to change color to .png icons.
 
 Just run:
 ```
-   python change_color.py INPUT_ICON_PATH OUTPUT_PATH_COLORED_ICON  
+   python change_color.py --input_path INPUT_ICON_PATH --output_path OUTPUT_PATH_COLORED_ICON  
 ```  
 and select the color from the color-picker that will appear after running the code.
 
 Example:
 ```
-   python change_color.py rabbit.png fancier_rabbit.png  
+   python change_color.py --input_path rabbit.png --output_path fancier_rabbit.png
 ```
 
 rabbit.png             |  fancier_rabbit.png
