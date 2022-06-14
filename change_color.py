@@ -5,7 +5,7 @@ from tkinter.colorchooser import askcolor
 import argparse
 
 
-def getColor():
+def get_color():
     """
     Function that creates a color-picker, the selected color is returned
     in RGB and HEX.
